@@ -1,0 +1,46 @@
+﻿@model IEnumerable<DataAccessLayer.MyEntities.User>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+
+<script>
+    function submitForm() {
+        $('#send').submit();
+    }
+
+    function goPartial() {
+        var name = $('#nameFilter').val();
+        var email = $('#emailFilter').val();
+        $('#partial').html('<img src="/Images/tenor.gif"/>');
+        $('#partial').load("/Users/UsersTablePartial?nameFilter=" + name + "&emailFilter=" + email);
+    }
+</script>
+
+<h2>Index</h2>
+<form id="send" method="post">
+    <div style="margin-bottom:10px">
+        <img src="~/Images/1.jpg" />
+        <img src="~/Images/10.jpg" />
+        <img src="~/Images/11.jpg" />
+    </div>
+    <div class="form-group">
+        UserName
+        <input class="form-control" type="text" name="nameFilter" id="nameFilter" />
+    </div>
+    <div class="form-group">
+        Email
+        <input class="form-control" type="text" name="emailFilter" id="emailFilter" />
+    </div>
+    <div class="form-group">
+        <input type="button" class="btn btn-primary" onclick="submitForm()" name="search" value="search" id="search" />
+        <input type="button" class="btn btn-primary" onclick="goPartial()" name="refresh" value="refresh" id="refresh" />
+    </div>
+</form>
+<p>
+    @Html.ActionLink("Create New", "AddUser")
+</p>
+<div id="partial">
+    @Html.Action("UsersTablePartial");
+</div>
